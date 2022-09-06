@@ -6,28 +6,28 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Pausable NFT and Sale
+ * @title NFT Sale with pausable transfers
  * @author Breakthrough Labs Inc.
  * @notice NFT, Sale, ERC721, Pausable
- * @custom:version 1.0.4
+ * @custom:version 1.0.8
+ * @custom:address 10
  * @custom:default-precision 0
- * @custom:simple-description ERC721 NFT with a built in sale. The owner is
+ * @custom:simple-description NFT with a built in sale. The owner is
  * able to pause both NFT transactions, and the sale - primarily in the case of a problem.
  * @dev Pausable ERC721 NFT, including:
  *
- *  - Built-in sale mechanism with an adjustable price.
+ *  - Built-in sale with an adjustable price.
  *  - Reserve function for the owner to mint free NFTs.
- *  - Methods that allow the owner to pause or unpause NFT transfers.
+ *  - Owner to pause or unpause NFT transfers.
  *  - Fixed maximum supply.
  *
  */
 
-contract PausableNFT is ERC721, ERC721Enumerable, Pausable, Ownable, Royalty {
+contract PausableNFT is ERC721, ERC721Enumerable, Pausable, Ownable {
     string private _baseURIextended;
-    bool public saleIsActive = false;
+    bool public saleIsActive = true;
     uint256 public immutable MAX_SUPPLY;
     /// @custom:precision 18
     uint256 public currentPrice;

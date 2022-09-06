@@ -7,30 +7,25 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Pausable ERC1155
+ * @title Multi-Collection NFT with pausable transfers
  * @author Breakthrough Labs Inc.
  * @notice NFT, ERC1155, Pausable
- * @custom:version 0.0.3
+ * @custom:version 1.0.7
+ * @custom:address 18
  * @custom:default-precision 0
- * @custom:simple-description Implementation of ERC1155 - the standard multi-token - with
- * pause functionality to hault token transfers.
- * @dev Implementation of ERC1155, the basic standard multi-token, including:
+ * @custom:simple-description An NFT that supports creating multiple collections,
+ * with ability for owner to pause NFT transfers.
+ * @dev ERC1155 NFT, the basic standard multi-token, with the following features:
  *
- *  - Methods that allow the owner to pause or unpause NFT transfers.
- *  - Adjustable metadata URI.
+ *  - Owner can pause or unpause NFT transfers.
+ *  - Adjustable metadata.
+ *  - Create multiple NFT collections with the same contract.
  *
  */
 
-contract PausableERC1155 is
-    ERC1155,
-    Ownable,
-    Pausable,
-    ERC1155Supply,
-    Royalty
-{
+contract PausableERC1155 is ERC1155, Ownable, Pausable, ERC1155Supply {
     /**
      * @param _uri NFT metadata URI
      */

@@ -10,9 +10,10 @@ import "@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFractio
  * @title Basic DAO
  * @author Breakthrough Labs Inc.
  * @notice DAO, Governance
- * @custom:version DRAFT
+ * @custom:version 0.0.2r
+ * @custom:address 21
  * @custom:default-precision 0
- * @custom:simple-description TODO
+ * @custom:simple-description A standard DAO setup. Voting period of 1 week, with a 1 block voting delay.
  * @dev A very simple implementation of a DAO. Voting period is locked in at 1 week,
  * and the voting delay is 1 block. There is no delay on approved proposals.
  *

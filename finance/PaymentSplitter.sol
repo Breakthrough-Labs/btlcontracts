@@ -6,32 +6,29 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Payment Splitter
+ * @title Royalty Splitter
  * @author Breakthrough Labs Inc.
- * @notice NFT, ERC1155
- * @custom:version DRAFT
+ * @notice Utility, Finance
+ * @custom:version 0.0.5
+ * @custom:address 20
  * @custom:default-precision 0
- * @custom:simple-description This contract allows Ether payments to be split among a group of accounts.
- * @dev This contract allows Ether payments to be split among a group of accounts. The sender does not need to be aware
- * that the Ether will be split in this way, since it is handled transparently by the contract.
+ * @custom:simple-description This contract allows payments to be split among a group of accounts.
+ * @dev This contract allows payments to be split among a group of accounts.
  *
- * The split can be in equal parts or in any other arbitrary proportion. The way this is specified is by assigning each
+ * The split can be in equal parts or set in percentages. The way this is specified is by assigning each
  * account to a number of shares. Of all the Ether that this contract receives, each account will then be able to claim
- * an amount proportional to the percentage of total shares they were assigned. The distribution of shares is set at the
- * time of contract deployment and can't be updated thereafter.
+ * an amount proportional to the percentage of total shares they were assigned. The distribution of shares is set
+ * when you deploy the contract and can't be updated afterwards.
  *
- * `PaymentSplitter` follows a _pull payment_ model. This means that payments are not automatically forwarded to the
- * accounts but kept in this contract, and the actual transfer is triggered as a separate step by calling the {release}
- * function.
+ * Payments must be claimed from the contract by each user.
  *
  * NOTE: This contract assumes that ERC20 tokens will behave similarly to native tokens (Ether). Rebasing tokens, and
  * tokens that apply fees during transfers, are likely to not be supported as expected. If in doubt, we encourage you
  * to run tests before sending real value to this contract.
  */
-contract PaymentSplitter is Context, Royalty {
+contract PaymentSplitter is Context {
     event PayeeAdded(address account, uint256 shares);
     event PaymentReleased(address to, uint256 amount);
     event ERC20PaymentReleased(
@@ -57,6 +54,8 @@ contract PaymentSplitter is Context, Royalty {
      *
      * All addresses in `payees` must be non-zero. Both arrays must have the same non-zero length, and there must be no
      * duplicates in `payees`.
+     * @param payees Addresses to split payments to
+     * @param shares_ The shares of each payee
      */
     constructor(address[] memory payees, uint256[] memory shares_) payable {
         require(
@@ -100,6 +99,7 @@ contract PaymentSplitter is Context, Royalty {
     /**
      * @dev Getter for the total amount of `token` already released. `token` should be the address of an IERC20
      * contract.
+     * @param token the address of an IERC20 to return the total amount released for.
      */
     function totalReleased(IERC20 token) public view returns (uint256) {
         return _erc20TotalReleased[token];
@@ -107,6 +107,7 @@ contract PaymentSplitter is Context, Royalty {
 
     /**
      * @dev Getter for the amount of shares held by an account.
+     * @param account the address of an account to return the number of shares for.
      */
     function shares(address account) public view returns (uint256) {
         return _shares[account];
@@ -114,6 +115,7 @@ contract PaymentSplitter is Context, Royalty {
 
     /**
      * @dev Getter for the amount of Ether already released to a payee.
+     * @param account the address of an account to return Ether released for.
      */
     function released(address account) public view returns (uint256) {
         return _released[account];
@@ -122,6 +124,8 @@ contract PaymentSplitter is Context, Royalty {
     /**
      * @dev Getter for the amount of `token` tokens already released to a payee. `token` should be the address of an
      * IERC20 contract.
+     * @param token address of an IERC20.
+     * @param account address of an account to return token released for.
      */
     function released(IERC20 token, address account)
         public
@@ -133,6 +137,7 @@ contract PaymentSplitter is Context, Royalty {
 
     /**
      * @dev Getter for the address of the payee number `index`.
+     * @param index of the payee address to return
      */
     function payee(uint256 index) public view returns (address) {
         return _payees[index];
@@ -140,6 +145,7 @@ contract PaymentSplitter is Context, Royalty {
 
     /**
      * @dev Getter for the amount of payee's releasable Ether.
+     * @param account address of the account to return releasable Ether for.
      */
     function releasable(address account) public view returns (uint256) {
         uint256 totalReceived = address(this).balance + totalReleased();
@@ -149,6 +155,8 @@ contract PaymentSplitter is Context, Royalty {
     /**
      * @dev Getter for the amount of payee's releasable `token` tokens. `token` should be the address of an
      * IERC20 contract.
+     * @param token address of the IERC20 to return releasable for.
+     * @param account address of the account to return releasable token for.
      */
     function releasable(IERC20 token, address account)
         public
@@ -164,6 +172,7 @@ contract PaymentSplitter is Context, Royalty {
     /**
      * @dev Triggers a transfer to `account` of the amount of Ether they are owed, according to their percentage of the
      * total shares and their previous withdrawals.
+     * @param account the address to release Ether to.
      */
     function release(address payable account) public virtual {
         require(_shares[account] > 0, "PaymentSplitter: account has no shares");
@@ -187,6 +196,8 @@ contract PaymentSplitter is Context, Royalty {
      * @dev Triggers a transfer to `account` of the amount of `token` tokens they are owed, according to their
      * percentage of the total shares and their previous withdrawals. `token` must be the address of an IERC20
      * contract.
+     * @param token the token to release.
+     * @param account the address to release token to.
      */
     function release(IERC20 token, address account) public virtual {
         require(_shares[account] > 0, "PaymentSplitter: account has no shares");

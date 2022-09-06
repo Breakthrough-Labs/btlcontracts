@@ -7,30 +7,25 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Burnable ERC1155
+ * @title Multi-Collection NFT with burnable NFTs
  * @author Breakthrough Labs Inc.
  * @notice NFT, ERC1155, Burnable
- * @custom:version 0.0.3
+ * @custom:version 1.0.8
+ * @custom:address 16
  * @custom:default-precision 0
- * @custom:simple-description Implementation of ERC1155 - the standard multi-token - with
+ * @custom:simple-description An NFT that supports creating multiple collections, with
  * built in burn functionality to directly decrease supply.
- * @dev Implementation of ERC1155, the basic standard multi-token, including:
+ * @dev ERC1155 NFT, the basic standard multi-token, with the following features:
  *
- *  - Methods that allow users to burn their tokens. This directly decreases supply.
- *  - Adjustable metadata URI.
+ *  - Burn feature that allow users to burn their NFTs. This directly decreases total supply.
+ *  - Adjustable metadata.
+ *  - Create multiple NFT collections with the same contract.
  *
  */
 
-contract BurnableERC1155 is
-    ERC1155,
-    Ownable,
-    ERC1155Burnable,
-    ERC1155Supply,
-    Royalty
-{
+contract BurnableERC1155 is ERC1155, Ownable, ERC1155Burnable, ERC1155Supply {
     /**
      * @param _uri NFT metadata URI
      */

@@ -7,20 +7,22 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Simple ERC1155
+ * @title Simple Multi-Collection NFT
  * @author Breakthrough Labs Inc.
  * @notice NFT, ERC1155
- * @custom:version 0.0.3
+ * @custom:version 1.0.7
+ * @custom:address 19
  * @custom:default-precision 0
- * @custom:simple-description Implementation of ERC1155 - the standard multi-token.
- * @dev Simple Implementation of ERC1155, the basic standard multi-token, without any additional functionality.
+ * @custom:simple-description An NFT that supports creating multiple collections.
+ * @dev ERC1155 NFT, the basic standard multi-token, with the following features:
+ *
+ *  - Create multiple NFT collections with the same contract.
  *
  */
 
-contract SimpleERC1155 is ERC1155, Ownable, ERC1155Supply, Royalty {
+contract SimpleERC1155 is ERC1155, Ownable, ERC1155Supply {
     /**
      * @param _uri NFT metadata URI
      */

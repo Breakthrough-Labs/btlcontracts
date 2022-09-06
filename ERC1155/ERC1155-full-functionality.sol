@@ -7,22 +7,23 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Full Functionality ERC1155
+ * @title Multi-Collection NFT with burnable NFTs and pausable transfers
  * @author Breakthrough Labs Inc.
  * @notice NFT, ERC1155, Pausable, Burnable
- * @custom:version 0.0.4
+ * @custom:version 1.07
+ * @custom:address 17
  * @custom:default-precision 0
- * @custom:simple-description Implementation of ERC1155 - the standard multi-token - with
- * built in burn functionality to directly decrease supply, as well as pause functionality to
- * hault token transfers.
- * @dev Implementation of ERC1155, the basic standard multi-token, including:
+ * @custom:simple-description An NFT that supports creating multiple collections, with
+ * built in burn functionality to directly decrease supply, and ability for owner to pause
+ * NFT transfers.
+ * @dev ERC1155 NFT, the basic standard multi-token, with the following features:
  *
- *  - Methods that allow users to burn their tokens. This directly decreases supply.
- *  - Methods that allow the owner to pause or unpause NFT transfers.
- *  - Adjustable metadata URI.
+ *  - Burn feature that allow users to burn their NFTs. This directly decreases total supply.
+ *  - Owner can pause or unpause NFT transfers.
+ *  - Adjustable metadata.
+ *  - Create multiple NFT collections with the same contract.
  *
  */
 
@@ -31,8 +32,7 @@ contract AdvancedERC1155 is
     Ownable,
     Pausable,
     ERC1155Burnable,
-    ERC1155Supply,
-    Royalty
+    ERC1155Supply
 {
     /**
      * @param _uri NFT metadata URI

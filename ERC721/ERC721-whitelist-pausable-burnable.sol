@@ -5,29 +5,32 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 
 /**
- * @title Advanced NFT and Wallet Limited Sale
+ * @title NFT Sale with burnable NFTs and wallet cap
  * @author Breakthrough Labs Inc.
- * @notice NFT, Sale, ERC721, Limited
- * @custom:version DRAFT
- * @custom:address 13
+ * @notice NFT, Sale, ERC721, Limited, Whitelist, Burnable
+ * @custom:version 1.0.3
+ * @custom:address 12
  * @custom:default-precision 0
- * @custom:simple-description WIP NFT with a built-in fee.
- * @dev ERC721 NFT, including:
+ * @custom:simple-description NFT and whitelisted Sale, with burn functions to completely remove NFTs from circulation.
+ * @dev ERC721 NFT with the following features:
  *
- *  - Built-in sale mechanism with an adjustable price.
+ *  - Built-in sale with an adjustable price.
  *  - Wallets can only purchase a limited number of NFTs during the sale.
  *  - Reserve function for the owner to mint free NFTs.
- *  - Breakthrough Labs takes 1% of all initial NFT sales.
  *  - Fixed maximum supply.
+ *  - Methods that allow users to burn their NFTs. This directly decreases total supply.
  *
  */
 
-contract AdvancedLimitedNFT is ERC721, ERC721Enumerable, Ownable {
-    address public constant FEE_ADDRESS =
-        0xD48E62cA7c8b60F233aecC111ED9EeF39565d89c;
-    uint256 public constant INITIAL_SALE_FEE = 1; // 1% fee on initial sale
+contract BurnableLimitedNFT is
+    ERC721,
+    ERC721Enumerable,
+    ERC721Burnable,
+    Ownable
+{
     uint256 public immutable MAX_SUPPLY;
 
     /// @custom:precision 18
@@ -109,9 +112,6 @@ contract AdvancedLimitedNFT is ERC721, ERC721Enumerable, Ownable {
      * @dev A way for the owner to withdraw all proceeds from the sale.
      */
     function withdraw() external onlyOwner {
-        payable(FEE_ADDRESS).transfer(
-            (address(this).balance * INITIAL_SALE_FEE) / 100
-        );
         payable(msg.sender).transfer(address(this).balance);
     }
 

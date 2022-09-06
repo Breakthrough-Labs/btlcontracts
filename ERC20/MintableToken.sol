@@ -4,25 +4,24 @@ pragma solidity ^0.8.10;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Mintable ERC20 Token
+ * @title Mintable Token
  * @author Breakthrough Labs Inc.
  * @notice Token, ERC20, Mintable
- * @custom:version 1.0.4
+ * @custom:version 1.0.7
+ * @custom:address 5
  * @custom:default-precision 18
- * @custom:simple-description ERC20 that allows the owner to mint additional tokens. There
- * is no cap on the total supply.
- * @dev ERC20 token, including:
+ * @custom:simple-description Token that allows the owner to mint as many tokens as desired.
+ * @dev ERC20 token with the following features:
  *
- *  - Preminted initial supply.
- *  - Minting is allowed. There is no cap on the total supply.
+ *  - Premint your initial supply.
+ *  - Mint as many tokens as you want with no cap.
  *  - Only the contract owner can mint new tokens.
  *
  */
 
-contract MintableToken is ERC20, Ownable, Royalty {
+contract MintableToken is ERC20, Ownable {
     /**
      * @param name Token Name
      * @param symbol Token Symbol

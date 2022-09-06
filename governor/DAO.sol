@@ -12,9 +12,10 @@ import "@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.so
  * @title Adjustable DAO
  * @author Breakthrough Labs Inc.
  * @notice DAO, Governance, Timelock, Adjustable
- * @custom:version DRAFT
+ * @custom:version 0.0.2r
+ * @custom:address 22
  * @custom:default-precision 0
- * @custom:simple-description TODO
+ * @custom:simple-description A customizable DAO. Voting periods and delays can be adjusted, with a timelock.
  * @dev A more advanced implementation of a DAO
  *
  *   - Settings are adjustable by approved proposals

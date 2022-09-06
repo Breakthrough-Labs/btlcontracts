@@ -4,10 +4,11 @@ pragma solidity ^0.8.11;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
- * @title SCR Deploy
+ * @title SCR Deploy using create
  * @author Breakthrough Labs Inc.
  * @notice Utility
- * @custom:version Experimental
+ * @custom:version Experimental.1
+ * @custom:address 1
  * @custom:default-precision 0
  * @custom:simple-description Smart Contract Recipes Deployer
  * @dev Smart Contract Recipes Deployer

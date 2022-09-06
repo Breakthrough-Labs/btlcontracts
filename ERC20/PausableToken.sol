@@ -5,27 +5,27 @@ pragma solidity ^0.8.10;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Pausable ERC20 Token
+ * @title Pausable Token
  * @author Breakthrough Labs Inc.
  * @notice Token, ERC20, Pausable, Fixed
- * @custom:version 1.0.4
+ * @custom:version 1.0.7
+ * @custom:address 6
  * @custom:default-precision 18
- * @custom:simple-description ERC20, with a fixed total supply, that allows
- * the owner to pause/unpause transactions - primarily in the case of a problem.
- * @dev ERC20 token, including:
+ * @custom:simple-description Token with a fixed total supply, that allows
+ * the owner to pause/unpause transfers - primarily in the case of a problem.
+ * @dev ERC20 token with the following features:
  *
- *  - Preminted initial supply.
- *  - No minting capabilities. Token supply is fixed.
+ *  - Premint your total supply.
+ *  - No minting function. This allows users to comfortably know the future supply of the token.
  *  - Methods that allow the owner to pause or unpause token transfers.
  *
  * Useful as an emergency stop button in the case of a large bug/problem.
  *
  */
 
-contract PausableToken is ERC20, Pausable, Ownable, Royalty {
+contract PausableToken is ERC20, Pausable, Ownable {
     /**
      * @param name Token Name
      * @param symbol Token Symbol

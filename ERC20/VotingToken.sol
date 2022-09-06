@@ -5,27 +5,27 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Voting ERC20 Token
+ * @title Voting Token
  * @author Breakthrough Labs Inc.
  * @notice Token, ERC20, Voting, Fixed
- * @custom:version 1.0.4
+ * @custom:version 1.0.8
+ * @custom:address 7
  * @custom:default-precision 18
- * @custom:simple-description Fixed supply ERC20 with additional functions to allow
- * voting on connected Governance/DAO proposals.
- * @dev ERC20 token, including:
+ * @custom:simple-description Fixed supply token that allows for
+ * voting on connected DAO proposals.
+ * @dev ERC20 token with the following features:
  *
- *  - Methods that allow token owners to vote on Governance/DAO proposals.
- *  - Preminted initial supply.
- *  - No minting capabilities. Token supply is fixed.
+ *  - Token owners can vote on Governance/DAO proposals.
+ *  - Premint your total supply.
+ *  - No minting function. This allows users to comfortably know the future supply of the token.
  *
- * Used alongside Governance/DAO contracts for voting.
+ * Used with Governance/DAO contracts for voting.
  *
  */
 
-contract VotingToken is ERC20, ERC20Permit, ERC20Votes, Royalty {
+contract VotingToken is ERC20, ERC20Permit, ERC20Votes {
     /**
      * @param name Token Name
      * @param symbol Token Symbol

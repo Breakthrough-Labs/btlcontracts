@@ -3,27 +3,27 @@
 pragma solidity ^0.8.10;
 
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Burnable ERC20 Token
+ * @title Burnable Token
  * @author Breakthrough Labs Inc.
  * @notice Token, ERC20, Burnable
- * @custom:version 1.0.4
+ * @custom:version 1.0.7
+ * @custom:address 2
  * @custom:default-precision 18
- * @custom:simple-description ERC20 that allows token holders to destroy tokens
- * in a way that can be recognized off-chain.
- * @dev ERC20 token, including:
+ * @custom:simple-description Token that allows token holders to destroy tokens
+ * in a way that can be recognized on-chain and off-chain. 
+ * @dev ERC20 token with the following features:
  *
- *  - Preminted initial supply.
- *  - No minting capabilities. Token supply cannot increase.
+ *  - Premint your total supply.
+ *  - No minting function. This allows users to comfortably know the future supply of the token.
  *  - Methods that allow users to burn their tokens. This directly decreases total supply.
  *
- * Used to transparently remove tokens from the supply.
+ * Used to burn tokens from the supply.
  *
  */
 
-contract BurnableToken is ERC20Burnable, Royalty {
+contract BurnableToken is ERC20Burnable {
     /**
      * @param name Token Name
      * @param symbol Token Symbol

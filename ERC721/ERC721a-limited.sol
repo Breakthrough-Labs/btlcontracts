@@ -5,29 +5,29 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "../base/ERC721A.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title ERC721A NFT and Limited Sale
+ * @title NFT Sale with bulk mint discount
  * @author Breakthrough Labs Inc.
  * @notice NFT, Sale, ERC721, ERC721A, Limited
- * @custom:version 1.0.4
+ * @custom:version 1.0.8
+ * @custom:address 14
  * @custom:default-precision 0
- * @custom:simple-description An ERC721A NFT implemention with a built in sale.
- * The sale includes a per wallet limit to ensure a large number of users are able to purchase NFTs. ERC721A
- * is an improved implementation of the IERC721 standard that supports minting multiple
- * tokens for close to the cost of one.
- * @dev ERC721A is an improved implementation of the IERC721 standard that supports minting multiple tokens for close to the cost of one. This implementation includes:
+ * @custom:simple-description An NFT with built in sale that provides bulk minting discounts.
+ * The sale includes a per wallet limit to ensure a large number of users are able to purchase NFTs.
+ * When minting multiple NFTs, gas costs are reduced compared to a normal NFT contract.
+ * @dev ERC721A NFT with the following features:
  *
- *  - Built-in sale mechanism with an adjustable price.
- *  - Wallets can only purchase a limited number of NFTs during the sale.
+ *  - Built-in sale with an adjustable price.
+ *  - Wallets can only buy a limited number of NFTs during the sale.
  *  - Reserve function for the owner to mint free NFTs.
  *  - Fixed maximum supply.
+ *  - Reduced Gas costs when minting many NFTs at the same time.
  *
  */
 
-contract LimitedERC721A is ERC721A, Ownable, Royalty {
-    bool public saleIsActive = false;
+contract LimitedERC721A is ERC721A, Ownable {
+    bool public saleIsActive = true;
     string private _baseURIextended;
 
     uint256 public immutable MAX_SUPPLY;

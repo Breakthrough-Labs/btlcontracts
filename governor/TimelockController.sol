@@ -12,9 +12,10 @@ import "@openzeppelin/contracts/utils/Address.sol";
  * @title TimelockController
  * @author OpenZeppelin
  * @notice Utility, DAO, Governance
- * @custom:version DRAFT
+ * @custom:version 0.0.2r
+ * @custom:address 23
  * @custom:default-precision 0
- * @custom:simple-description TODO
+ * @custom:simple-description Delays the execution of a separate contract function. Primarily used as part of a DAO
  * @dev Delays the execution of a separate contract function. Primarily
  * used as part of a DAO
  *

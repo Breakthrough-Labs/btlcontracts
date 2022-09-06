@@ -5,28 +5,28 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Standard NFT and Wallet Limited Sale
+ * @title NFT Sale with wallet cap
  * @author Breakthrough Labs Inc.
  * @notice NFT, Sale, ERC721, Limited
- * @custom:version 1.0.4
+ * @custom:version 1.0.8
+ * @custom:address 9
  * @custom:default-precision 0
- * @custom:simple-description ERC721 NFT with a built in sale. The sale includes a
- * per wallet limit to ensure a large number of users are able to purchase NFTs.
- * @dev ERC721 NFT, including:
+ * @custom:simple-description NFT with a built in sale. The sale includes a
+ * per wallet limit to guarantee a large number of users are able to purchase NFTs.
+ * @dev ERC721 NFT with the following features:
  *
- *  - Built-in sale mechanism with an adjustable price.
+ *  - Built-in sale with an adjustable price.
  *  - Wallets can only purchase a limited number of NFTs during the sale.
  *  - Reserve function for the owner to mint free NFTs.
  *  - Fixed maximum supply.
  *
  */
 
-contract LimitedNFT is ERC721, ERC721Enumerable, Ownable, Royalty {
+contract LimitedNFT is ERC721, ERC721Enumerable, Ownable {
     string private _baseURIextended;
-    bool public saleIsActive = false;
+    bool public saleIsActive = true;
 
     uint256 public immutable MAX_SUPPLY;
     /// @custom:precision 18

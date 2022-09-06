@@ -3,24 +3,24 @@
 pragma solidity ^0.8.10;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Basic ERC20 Token
+ * @title Simple Token
  * @author Breakthrough Labs Inc.
  * @notice Token, ERC20, Fixed Supply
- * @custom:version 1.0.4
+ * @custom:version 1.0.7
+ * @custom:address 4
  * @custom:default-precision 18
- * @custom:simple-description Standard ERC20. A fixed supply is minted on deployment, and
+ * @custom:simple-description Simple Token. A fixed supply is minted on deployment, and
  * new tokens can never be created.
- * @dev ERC20 token, including:
+ * @dev ERC20 token with the following features:
  *
- *  - Preminted initial supply.
- *  - No minting capabilities. Token supply is fixed.
+ *  - Premint your total supply.
+ *  - No minting function. This allows users to comfortably know the future supply of the token.
  *
  */
 
-contract FixedToken is ERC20, Royalty {
+contract FixedToken is ERC20 {
     /**
      * @param name Token Name
      * @param symbol Token Symbol

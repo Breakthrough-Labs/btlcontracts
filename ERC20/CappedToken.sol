@@ -4,24 +4,23 @@ pragma solidity ^0.8.10;
 
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "../base/Royalty.sol";
 
 /**
- * @title Capped ERC20 Token
+ * @title Capped Token
  * @author Breakthrough Labs Inc.
  * @notice Token, ERC20, Mintable, Capped
- * @custom:version 1.0.4
+ * @custom:version 1.0.7
+ * @custom:address 3
  * @custom:default-precision 18
- * @custom:simple-description ERC20 that allows the owner to mint additional tokens while
- * the token supply is below the cap.
- * @dev ERC20 token, including:
+ * @custom:simple-description Token that allows the owner to mint tokens up to the cap.
+ * @dev ERC20 token with the following features:
  *
- *  - Preminted initial supply.
- *  - Minting is allowed, but total supply cannot exceed the cap.
+ *  - Premint your total supply.
+ *  - Minting is allowed, but only up to the maximum cap.
  *
  */
 
-contract CappedToken is ERC20Capped, Ownable, Royalty {
+contract CappedToken is ERC20Capped, Ownable {
     /**
      * @param name Token Name
      * @param symbol Token Symbol
