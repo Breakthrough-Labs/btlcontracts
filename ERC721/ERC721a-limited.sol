@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "../base/ERC721A.sol";
+import "../ERC721A.sol";
 
 /**
  * @title NFT Sale with bulk mint discount
